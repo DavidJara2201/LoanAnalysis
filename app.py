@@ -15,23 +15,33 @@ def home():
 
     return render_template('home.html')
 
-@app.route('/predict_api', method = ['POST'])
+@app.route('/predict_api', methods = ['POST'])
 def predict_api():
     data = request.json['data']
+    print(data)
     X = pd.DataFrame(data, index = [0])
+
+    
 
     X["Self_Employed"] = np.where(X["Self_Employed"] == "Yes", 1, np.where(X["Self_Employed"].isna(), X["Self_Employed"], 0))
     X["Married"] = np.where(X["Married"] == "Yes", 1, np.where(X["Married"].isna(), X["Married"], 0))
     X["Male"] = np.where(X["Gender"] == "Male", 1, np.where(X["Gender"].isna(), X["Gender"], 0))
     X["Graduate"] = np.where(X["Education"] == "Graduate", 1, np.where(X["Education"].isna(), X["Education"], 0))
 
+    
+
     ## Dealing with the number of dependents
-    X[["1","2","3+"]] = pd.Series([0,0,0])
+
+    X["1"] = 0
+    X["2"] = 0
+    X["3+"] = 0
     dep = X["Dependents"][0]
     X[dep] = 1
 
+    
     ## Dealing with the area
-    X[["Semiurban","Urban"]] = pd.Series([0,0])
+    X["Semiurban"] = 0
+    X["Urban"] = 0
     ar = X["Area"][0]
     X[ar] = 1
 
