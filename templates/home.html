@@ -1,5 +1,45 @@
-<h1>
+<!DOCTYPE html>
+<html >
 
-Hello World
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
-</h1>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Will you receive a loan?</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+      <input type="text" name="Gender" placeholder="Gender" required="required" /><br>
+    	<input type="text" name="Married" placeholder="Are you married?" required="required" /><br>
+        <input type="text" name="Dependants" placeholder="How many dependants (0, 1, 2, 3+)" required="required" /><br>
+        <input type="text" name="Education" placeholder="Education (Graduate or Not Graduate)" required="required" /><br>
+        <input type="text" name="Self_Employed" placeholder="Are you self employed?" required="required" /><br>
+        <input type="text" name="Applicant_Income" placeholder="How much do you make a year?" required="required" /><br>
+        <input type="text" name="Coapplicant_Income" placeholder="How much does you coapplicant make a year (if no coapplicant then 0)" required="required" /><br>
+        <input type="text" name="Loan_Amount" placeholder="Loan Amount" required="required" /><br>
+        <input type="text" name="Term" placeholder="Payment term in months" required="required" /><br>
+        <input type="text" name="Area" placeholder="Where do you live? (Rural, Urban, Semiurban)" required="required" /><br>
+
+       
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+  
+   
+ </div>
+ {{prediction_text}}
+
+</body>
+</html>
